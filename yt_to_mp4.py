@@ -11,19 +11,11 @@ class Main():
         self.label = Label(root, text= "! Youtube To MP4 Converter !",bg = 'bisque',fg= 'darkred',bd = "5",font= ("Comic Sans Ms",20,"bold"))
         self.label.place(x= 100,y= 20)
 
-        self.entry2 = Entry(root,textvariable= mytext2,width= 35,fg= 'indigo',bg= "white", font= 25 )
-        self.entry2.insert(0,"  Paste Your Download Path Here  ")
-        self.entry2.place(x = 110,y = 80)
         
-        self.set_path = Button(root, text= "SET PATH",fg= "black",bg= 'lightcoral',font= ("Arial",15,"bold"),bd= 8,command= self.set_path_btn)
-        self.set_path.place(x = 230,y = 130)
+        self.path = "C:/Users/Public/Downloads"
           
         self.exit = Button(root, text= " EXIT ",fg= "black",bg= "lightcoral",font= ("Arial",15,"bold"),bd= 10,command= self.exit_btn)
         self.exit.place(x = 240,y = 515)
-
-    def set_path_btn(self):
-
-        self.path = self.entry2.get()
 
         self.entry1 = Entry(win,textvariable= mytext1,width= 35,fg= "indigo", font= 25 ,bg= "white")
         self.entry1.insert(0,"  Paste Your Video Link Here  ")
@@ -32,7 +24,7 @@ class Main():
         self.submit = Button(win, text= "SUBMIT",fg= "black",bg= "lightcoral",font= ("Arial",15,"bold"),bd= 8,command= self.submit_btn)
         self.submit.place(x = 230,y = 130)
 
-        self.set_path.destroy()
+        
       
     def submit_btn(self):
         try:
@@ -54,7 +46,7 @@ class Main():
                 self.download1.destroy() 
 
             except AttributeError as v  :
-                print("  ")
+                print(" ")
 
             self.link =  self.entry1.get()
 
@@ -127,42 +119,41 @@ class Main():
                 self.download1.destroy() 
 
         except Exception as e:
-            print("   ")
+            print("  ")
    
     def download1_btn(self):
     
-        try:
-            self.path = self.entry2.get()
-            self.pathl = self.path.replace("\\","/")
+      
+            
+        self.pathl = self.path.replace("\\","/")
 
-            self.three =   self.filter.get_by_resolution("360p").download(self.pathl)    
-            self.msg = messagebox.showinfo("showinfo", "DOWNLOADED") 
-                    
-        except FileNotFoundError as f :      
-            print("PATH NOT SET")
+        self.three =   self.filter.get_by_resolution("360p").download(self.pathl)    
+        self.msg = messagebox.showinfo("showinfo", "DOWNLOADED SUCCESSFULLY !\n\nDownloaded Path : C : / Users / Public / Downloads ") 
+                
+        
         
     def download2_btn(self):
-        try:
-            self.path = self.entry2.get()
-            self.pathl = self.path.replace("\\","/")
+        
     
-            self.seven = self.filter.get_by_resolution("720p").download(self.pathl)     
-            self.msg = messagebox.showinfo("INFO", "DOWNLOADED") 
+        self.pathl = self.path.replace("\\","/")
 
-        except FileNotFoundError as f :
-            print("PATH NOT SET ")  
+        self.seven = self.filter.get_by_resolution("720p").download(self.pathl)     
+        self.msg = messagebox.showinfo("INFO", "DOWNLOADED SUCCESSFULLY !\n\nDownloaded Path : C : / Users / Public / Downloads ") 
+
+        
+              
 
     def download3_btn(self):
 
         try :
 
-            self.path = self.entry2.get()
+            
             self.pathl = self.path.replace("\\","/")
 
             self.filter2 = self.yt_obj.streams.filter(type= "audio",file_extension= "webm")
 
             self.file_name =  self.filter2.first().download(output_path= self.pathl)
-            self.msg = messagebox.showinfo("INFO", "DOWNLOADED")
+            self.msg = messagebox.showinfo("INFO", "DOWNLOADED SUCCESSFULLY !\n\nDownloaded Path : C : / Users / Public / Downloads ")
             self.name = self.file_name
 
             self.p = self.name.replace("webm","mp3")            
@@ -174,8 +165,7 @@ class Main():
         except FileExistsError as f :
             print("File is already exit !!")    
         
-        except FileNotFoundError as g :
-            print("PATH NOT SET")
+       
             
     
     def exit_btn(self):
